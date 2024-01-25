@@ -7,6 +7,8 @@ from market import app
 if __name__ == "__main__":
 
     # with app.app_context():
+        # # drop the database tables
+        # db.drop_all()
         # create database and table
         # db.create_all()
 
