@@ -8,6 +8,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///market.db'
+app.config['SECRET_KEY'] = '083fd1de6e125667b4d972b4'  # os.urandom(12).hex()
+
 db = SQLAlchemy(app)
 
 
