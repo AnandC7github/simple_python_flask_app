@@ -12,4 +12,5 @@ db = SQLAlchemy(app)
 
 
 from market import routes
-from market.model import Item
+# from market.model import Item
+
