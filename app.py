@@ -1,10 +1,12 @@
-from market import app, db, Item
+'''Run the application'''
+from market import app
+# from market import app, db, Item
 
 # Run the flask app
 
 if __name__ == "__main__":
 
-    with app.app_context():
+    # with app.app_context():
         # create database and table
         # db.create_all()
 
@@ -17,8 +19,8 @@ if __name__ == "__main__":
         # print(Item.query.all())
 
         # # Filter the query results 
-        for item in Item.query.filter_by(price=500):
-            print(">> ",item)
+        # for item in Item.query.filter_by(price=500):
+        #     print(">> ",item)
 
 
     app.run(host="0.0.0.0", port=80, debug=True)
