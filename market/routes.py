@@ -1,9 +1,10 @@
 '''App routes'''
-from flask import render_template
+from flask import render_template, redirect
 
-from market import app
-from market.model import Item
+from market import app, db
+from market.model import Item, User
 from market.forms import Form
+
 
 
 @app.route("/")
@@ -31,10 +32,22 @@ def market():
 #     return f"hello {user}"
 
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register_form():
     '''user registration route'''
     form = Form()
+
+    if form.validate_on_submit():
+        user_to_create = User(
+            username=form.username.data,
+            email=form.email.data,
+            password=form.password.data)
+        
+        db.session.add(user_to_create)
+        db.session.commit()
+        return redirect('/market')
+        
     return render_template('register.html', form=form)
+
 
 
