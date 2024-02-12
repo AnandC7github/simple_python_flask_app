@@ -1,5 +1,5 @@
 '''App routes'''
-from flask import render_template, redirect
+from flask import render_template, redirect, url_for, flash,
 
 from market import app, db
 from market.model import Item, User
@@ -38,10 +38,12 @@ def register_form():
 
   if form.validate_on_submit():
     print(form.username.data, "------")
-    user_to_create =User(username=form.username.data,email=form.email.data,password=form.password.data)
+    user_to_create=User(username=form.username.data,email=form.email.data,password=form.password.data)
 
     db.session.add(user_to_create)
     db.session.commit()
     return redirect('/market')
-
+  if form.errors != {}: #if there are no error from validations
+    for err_msg in form.errors.values():
+      flash(f'There was an error in creating a user: {err_msg}')
   return render_template('register.html', form=form)
