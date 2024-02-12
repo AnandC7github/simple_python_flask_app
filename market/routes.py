@@ -38,9 +38,7 @@ def register_form():
 
   if form.validate_on_submit():
     print(form.username.data, "------")
-    user_to_create = User(username=form.username.data,
-                          email=form.email.data,
-                          password=form.password.data)
+    user_to_create =User(username=form.username.data,email=form.email.data,password=form.password.data)
 
     db.session.add(user_to_create)
     db.session.commit()
