@@ -1,6 +1,5 @@
 '''SQLlite Model '''
-from market import db, app
-
+from market import db, app, bcrypt
 
 class User(db.Model):
   """Database table for USERS"""
@@ -10,6 +9,14 @@ class User(db.Model):
   password = db.Column(db.String(60), nullable=False)
   budget = db.Column(db.Integer(), nullable=False, default=1000)
   items = db.relationship("Item", backref='owned_user', lazy=True)
+
+  @property
+  def password(self):
+    return self.password
+
+  @password.setter
+  def password(self, plain_text_password):
+    self.password = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
 
   def __repr__(self) -> str:
     return f"USER [ {self.username} ]"
