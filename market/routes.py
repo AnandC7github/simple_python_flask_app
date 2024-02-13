@@ -45,5 +45,5 @@ def register_form():
     return redirect('/market')
   if form.errors != {}: #if there are no error from validations
     for err_msg in form.errors.values():
-      flash(f'There was an error in creating a user: {err_msg}')
+      flash(f'There was an error in creating a user: {err_msg}', category='danger')
   return render_template('register.html', form=form)
